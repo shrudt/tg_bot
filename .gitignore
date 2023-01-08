@@ -1,0 +1,8 @@
+tg_bot/*.env
+tg_bot/bot_handlers/admin_handlers.py
+.idea
+/venv
+*.log
+sqlitedb
+**/__pycache__
+tg_bot_analytic/db.py

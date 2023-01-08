@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body style="background-color: black">
+<h3 style="color: white">Статистика</h3>
+<canvas  height='60%' id="myChart"> Статистика </canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<form method="post">
+    <input type="date" name="start_date">
+    <input type="date" name="end_date">
+    <input type="submit" value="Ok">
+</form>
+
+
+Уникальных пользователей: {{ unique }}
+<br>
+
+
+
+<script>
+  const ctx = document.getElementById('myChart');
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: {{ date|tojson }},
+      datasets: [{
+        label: 'Количество запусков бота',
+        data: {{ start_bot|tojson }},
+        borderWidth: 1
+      },{
+        label: 'Начали заказ через телефон',
+        data: {{ operator_order|tojson }},
+        borderWidth: 1
+        },{
+        label: 'Заказали через телефон',
+        data: {{ operator_order_complete|tojson }},
+        borderWidth: 1
+        }
+      ]
+    },
+
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+</body>
+</html>

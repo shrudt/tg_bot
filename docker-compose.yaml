@@ -1,0 +1,39 @@
+version: "3"
+
+services:
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    restart: always
+
+  bot_cont:
+    build: tg_bot/
+    links:
+      - redis
+      - nginx
+    volumes:
+      - D:\TgBot\sqlitedb:/usr/src/app/sqlitedb
+
+
+  nginx:
+    build: nginx/
+    ports:
+      - '80:80'
+    links:
+      - bot_stat
+
+
+  bot_stat:
+    build: tg_bot_analytic/
+    command: gunicorn main:app --bind 0.0.0.0:8000
+
+    ports:
+      - "8000:8000"
+    expose:
+      - "8000"
+    volumes:
+      - D:\TgBot\sqlitedb:/usr/src/app/sqlitedb
+
+
+
