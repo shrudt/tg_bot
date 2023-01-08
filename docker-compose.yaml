@@ -13,7 +13,7 @@ services:
       - redis
       - nginx
     volumes:
-      - D:\TgBot\sqlitedb:/usr/src/app/sqlitedb
+      -
 
 
   nginx:
@@ -33,7 +33,7 @@ services:
     expose:
       - "8000"
     volumes:
-      - D:\TgBot\sqlitedb:/usr/src/app/sqlitedb
+      -
 
 
 
